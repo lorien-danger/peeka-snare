@@ -1,7 +1,9 @@
 import { load } from "https://deno.land/std@0.215.0/dotenv/mod.ts";
 import type { CodeTriggerWithTrackingCode } from "./types/supabase.ts";
 
-const { RESEND_API_KEY } = await load();
+const env = await load();
+
+const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY") || env.RESEND_API_KEY;
 
 const generateEmail = (data: CodeTriggerWithTrackingCode) => {
   return `
