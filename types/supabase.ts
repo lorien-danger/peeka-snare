@@ -28,7 +28,7 @@ export type Database = {
           proxy: boolean | null;
           region: string | null;
           tor: boolean | null;
-          tracking_code: string;
+          tracking_code_id: string;
           triggered_at: string;
           user_agent: string | null;
           uuid: string;
@@ -52,7 +52,7 @@ export type Database = {
           proxy?: boolean | null;
           region?: string | null;
           tor?: boolean | null;
-          tracking_code: string;
+          tracking_code_id: string;
           triggered_at?: string;
           user_agent?: string | null;
           uuid?: string;
@@ -76,7 +76,7 @@ export type Database = {
           proxy?: boolean | null;
           region?: string | null;
           tor?: boolean | null;
-          tracking_code?: string;
+          tracking_code_id?: string;
           triggered_at?: string;
           user_agent?: string | null;
           uuid?: string;
@@ -85,7 +85,7 @@ export type Database = {
         Relationships: [
           {
             foreignKeyName: "code_trigger_tracking_code_fkey";
-            columns: ["tracking_code"];
+            columns: ["tracking_code_id"];
             isOneToOne: false;
             referencedRelation: "tracking_code";
             referencedColumns: ["code"];
@@ -220,6 +220,11 @@ export type Enums<
   ? Database["public"]["Enums"][PublicEnumNameOrOptions]
   : never;
 
-export type CodeTriggerWithTrackingCode = Tables<"code_trigger"> & {
+type CodeTrigger = Tables<"code_trigger">;
+
+export type CodeTriggerWithTrackingCode = Omit<
+  CodeTrigger,
+  "tracking_code_id"
+> & {
   tracking_code: Tables<"tracking_code">;
 };

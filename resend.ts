@@ -10,7 +10,9 @@ const generateEmail = (data: CodeTriggerWithTrackingCode) => {
                 <h2>Identity Information</h2>
                 <p><strong>UUID:</strong> ${data.uuid}</p>
                 <p><strong>Triggered At:</strong> ${data.triggered_at}</p>
-                <p><strong>Tracking Code:</strong> ${data.tracking_code}</p>
+                <p><strong>Tracking Code:</strong> ${
+                  data.tracking_code.code
+                }</p>
                 <p><strong>IP Address:</strong> ${data.ip_address}</p>
                 <p><strong>Ephemeral Port:</strong> ${data.ephemeral_port}</p>
                 <p><strong>Browser Fingerprint:</strong> ${
@@ -49,6 +51,8 @@ const generateEmail = (data: CodeTriggerWithTrackingCode) => {
 };
 
 export const sendEmail = async (data: CodeTriggerWithTrackingCode) => {
+  console.log(data.tracking_code);
+
   const response = await fetch("https://api.resend.com/emails", {
     method: "POST",
     headers: {
