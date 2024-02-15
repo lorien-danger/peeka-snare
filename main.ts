@@ -23,7 +23,7 @@ Deno.serve(async (request, info) => {
       ephemeral_port: remoteAddr.port,
     })
     .eq("uuid", uuid)
-    // .eq("ip_address", remoteAddr.hostname)
+    .eq("ip_address", remoteAddr.hostname)
     .select("*, tracking_code(*)")
     .returns<CodeTriggerWithTrackingCode[]>()
     .single();
