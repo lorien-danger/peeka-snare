@@ -1,10 +1,6 @@
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-import type { Database } from "./types/supabase.ts";
-
-const supabase = createClient<Database>(
-  "https://chvktpewqvijkcpbiobr.supabase.co",
-  "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNodmt0cGV3cXZpamtjcGJpb2JyIiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcwNzI2MzUzMiwiZXhwIjoyMDIyODM5NTMyfQ.55dhiljE-2OFw7Bj049_9MDIt11GH-c2dWL4JsgS-Bk"
-);
+import { supabase } from "./supabase.ts";
+import { sendEmail } from "./resend.ts";
+import type { CodeTriggerWithTrackingCode } from "./types/supabase.ts";
 
 Deno.serve(async (request, info) => {
   const url = new URL(request.url);
@@ -28,7 +24,8 @@ Deno.serve(async (request, info) => {
     })
     .eq("uuid", uuid)
     .eq("ip_address", remoteAddr.hostname)
-    .select();
+    .select("*, tracking_code(*)")
+    .returns<CodeTriggerWithTrackingCode>();
 
   if (!data || error) {
     console.error(error);
@@ -36,5 +33,6 @@ Deno.serve(async (request, info) => {
   }
 
   console.log("Captured", data);
+  await sendEmail(data);
   return new Response("Verified", { status: 200 });
 });

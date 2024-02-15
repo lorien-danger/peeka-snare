@@ -4,134 +4,141 @@ export type Json =
   | boolean
   | null
   | { [key: string]: Json | undefined }
-  | Json[]
+  | Json[];
 
 export type Database = {
   public: {
     Tables: {
       code_trigger: {
         Row: {
-          browser: string | null
-          browser_fingerprint: string | null
-          city: string | null
-          country_code: string | null
-          device_brand: string | null
-          device_model: string | null
-          ip_address: string
-          is_bot: boolean | null
-          is_mobile: boolean | null
-          isp: string | null
-          latitude: number | null
-          longitude: number | null
-          operating_system: string | null
-          proxy: boolean | null
-          region: string | null
-          tor: boolean | null
-          tracking_code: string
-          triggered_at: string
-          user_agent: string | null
-          uuid: string
-          vpn: boolean | null
-        }
+          browser: string | null;
+          browser_fingerprint: string | null;
+          city: string | null;
+          country_code: string | null;
+          device_brand: string | null;
+          device_model: string | null;
+          ephemeral_port: number | null;
+          ip_address: string;
+          is_bot: boolean | null;
+          is_mobile: boolean | null;
+          isp: string | null;
+          latitude: number | null;
+          longitude: number | null;
+          operating_system: string | null;
+          proxy: boolean | null;
+          region: string | null;
+          tor: boolean | null;
+          tracking_code: string;
+          triggered_at: string;
+          user_agent: string | null;
+          uuid: string;
+          vpn: boolean | null;
+        };
         Insert: {
-          browser?: string | null
-          browser_fingerprint?: string | null
-          city?: string | null
-          country_code?: string | null
-          device_brand?: string | null
-          device_model?: string | null
-          ip_address: string
-          is_bot?: boolean | null
-          is_mobile?: boolean | null
-          isp?: string | null
-          latitude?: number | null
-          longitude?: number | null
-          operating_system?: string | null
-          proxy?: boolean | null
-          region?: string | null
-          tor?: boolean | null
-          tracking_code: string
-          triggered_at?: string
-          user_agent?: string | null
-          uuid?: string
-          vpn?: boolean | null
-        }
+          browser?: string | null;
+          browser_fingerprint?: string | null;
+          city?: string | null;
+          country_code?: string | null;
+          device_brand?: string | null;
+          device_model?: string | null;
+          ephemeral_port?: number | null;
+          ip_address: string;
+          is_bot?: boolean | null;
+          is_mobile?: boolean | null;
+          isp?: string | null;
+          latitude?: number | null;
+          longitude?: number | null;
+          operating_system?: string | null;
+          proxy?: boolean | null;
+          region?: string | null;
+          tor?: boolean | null;
+          tracking_code: string;
+          triggered_at?: string;
+          user_agent?: string | null;
+          uuid?: string;
+          vpn?: boolean | null;
+        };
         Update: {
-          browser?: string | null
-          browser_fingerprint?: string | null
-          city?: string | null
-          country_code?: string | null
-          device_brand?: string | null
-          device_model?: string | null
-          ip_address?: string
-          is_bot?: boolean | null
-          is_mobile?: boolean | null
-          isp?: string | null
-          latitude?: number | null
-          longitude?: number | null
-          operating_system?: string | null
-          proxy?: boolean | null
-          region?: string | null
-          tor?: boolean | null
-          tracking_code?: string
-          triggered_at?: string
-          user_agent?: string | null
-          uuid?: string
-          vpn?: boolean | null
-        }
+          browser?: string | null;
+          browser_fingerprint?: string | null;
+          city?: string | null;
+          country_code?: string | null;
+          device_brand?: string | null;
+          device_model?: string | null;
+          ephemeral_port?: number | null;
+          ip_address?: string;
+          is_bot?: boolean | null;
+          is_mobile?: boolean | null;
+          isp?: string | null;
+          latitude?: number | null;
+          longitude?: number | null;
+          operating_system?: string | null;
+          proxy?: boolean | null;
+          region?: string | null;
+          tor?: boolean | null;
+          tracking_code?: string;
+          triggered_at?: string;
+          user_agent?: string | null;
+          uuid?: string;
+          vpn?: boolean | null;
+        };
         Relationships: [
           {
-            foreignKeyName: "code_trigger_tracking_code_fkey"
-            columns: ["tracking_code"]
-            isOneToOne: false
-            referencedRelation: "tracking_code"
-            referencedColumns: ["code"]
+            foreignKeyName: "code_trigger_tracking_code_fkey";
+            columns: ["tracking_code"];
+            isOneToOne: false;
+            referencedRelation: "tracking_code";
+            referencedColumns: ["code"];
           }
-        ]
-      }
+        ];
+      };
       tracking_code: {
         Row: {
-          code: string
-          created_at: string
-          file_name: string
-          file_size: number | null
-          type: Database["public"]["Enums"]["file_type"] | null
-        }
+          code: string;
+          created_at: string;
+          file_name: string;
+          file_size: number | null;
+          service: Database["public"]["Enums"]["service"];
+          type: Database["public"]["Enums"]["file_type"] | null;
+        };
         Insert: {
-          code: string
-          created_at?: string
-          file_name: string
-          file_size?: number | null
-          type?: Database["public"]["Enums"]["file_type"] | null
-        }
+          code: string;
+          created_at?: string;
+          file_name: string;
+          file_size?: number | null;
+          service?: Database["public"]["Enums"]["service"];
+          type?: Database["public"]["Enums"]["file_type"] | null;
+        };
         Update: {
-          code?: string
-          created_at?: string
-          file_name?: string
-          file_size?: number | null
-          type?: Database["public"]["Enums"]["file_type"] | null
-        }
-        Relationships: []
-      }
-    }
+          code?: string;
+          created_at?: string;
+          file_name?: string;
+          file_size?: number | null;
+          service?: Database["public"]["Enums"]["service"];
+          type?: Database["public"]["Enums"]["file_type"] | null;
+        };
+        Relationships: [];
+      };
+    };
     Views: {
-      [_ in never]: never
-    }
+      [_ in never]: never;
+    };
     Functions: {
       generate_tracking_code: {
-        Args: Record<PropertyKey, never>
-        Returns: string
-      }
-    }
+        Args: Record<PropertyKey, never>;
+        Returns: string;
+      };
+    };
     Enums: {
-      file_extension: "png" | "jpg" | "mov" | "mp4" | "pdf" | "docx" | "doc"
-      file_type: "image" | "video" | "document" | "other"
-    }
+      file_extension: "png" | "jpg" | "mov" | "mp4" | "pdf" | "docx" | "doc";
+      file_type: "image" | "video" | "document" | "other";
+      service: "uploadshare" | "netdocuments";
+    };
     CompositeTypes: {
-      [_ in never]: never
-    }
-  }
-}
+      [_ in never]: never;
+    };
+  };
+};
 
 export type Tables<
   PublicTableNameOrOptions extends
@@ -144,7 +151,7 @@ export type Tables<
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? (Database[PublicTableNameOrOptions["schema"]]["Tables"] &
       Database[PublicTableNameOrOptions["schema"]]["Views"])[TableName] extends {
-      Row: infer R
+      Row: infer R;
     }
     ? R
     : never
@@ -152,11 +159,11 @@ export type Tables<
       Database["public"]["Views"])
   ? (Database["public"]["Tables"] &
       Database["public"]["Views"])[PublicTableNameOrOptions] extends {
-      Row: infer R
+      Row: infer R;
     }
     ? R
     : never
-  : never
+  : never;
 
 export type TablesInsert<
   PublicTableNameOrOptions extends
@@ -167,17 +174,17 @@ export type TablesInsert<
     : never = never
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Insert: infer I
+      Insert: infer I;
     }
     ? I
     : never
   : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
   ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Insert: infer I
+      Insert: infer I;
     }
     ? I
     : never
-  : never
+  : never;
 
 export type TablesUpdate<
   PublicTableNameOrOptions extends
@@ -188,17 +195,17 @@ export type TablesUpdate<
     : never = never
 > = PublicTableNameOrOptions extends { schema: keyof Database }
   ? Database[PublicTableNameOrOptions["schema"]]["Tables"][TableName] extends {
-      Update: infer U
+      Update: infer U;
     }
     ? U
     : never
   : PublicTableNameOrOptions extends keyof Database["public"]["Tables"]
   ? Database["public"]["Tables"][PublicTableNameOrOptions] extends {
-      Update: infer U
+      Update: infer U;
     }
     ? U
     : never
-  : never
+  : never;
 
 export type Enums<
   PublicEnumNameOrOptions extends
@@ -211,4 +218,8 @@ export type Enums<
   ? Database[PublicEnumNameOrOptions["schema"]]["Enums"][EnumName]
   : PublicEnumNameOrOptions extends keyof Database["public"]["Enums"]
   ? Database["public"]["Enums"][PublicEnumNameOrOptions]
-  : never
+  : never;
+
+export type CodeTriggerWithTrackingCode = Tables<"code_trigger"> & {
+  tracking_code: Tables<"tracking_code">;
+};
